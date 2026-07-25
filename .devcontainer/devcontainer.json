@@ -1,0 +1,42 @@
+{
+  "name": "ConfTracker (Rails 8 + Ruby 4.0)",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+
+  "forwardPorts": [3000, 45678],
+  "portsAttributes": {
+    "3000": {
+      "label": "Rails",
+      "onAutoForward": "notify"
+    },
+    "45678": {
+      "label": "Ruby Debug",
+      "onAutoForward": "ignore"
+    }
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "Shopify.ruby-lsp",
+        "koichisasada.vscode-rdbg",
+        "aki77.rails-routes",
+        "kaiwood.endwise",
+        "castwide.solargraph"
+      ],
+      "settings": {
+        "rubyLsp.rubyVersionManager": "none",
+        "rubyLsp.bundleGemfile": "Gemfile",
+        "editor.formatOnSave": true,
+        "files.associations": {
+          "*.erb": "erb"
+        }
+      }
+    }
+  },
+
+  "postCreateCommand": "bundle install && yarn install",
+
+  "remoteUser": "vscode"
+}
