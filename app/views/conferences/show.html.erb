@@ -1,0 +1,34 @@
+<section class="max-w-3xl">
+	<div class="panel">
+		<h1 class="mb-4"><%= @conference.name %></h1>
+
+		<p class="mb-4 text-slate-700">
+			<span class="font-semibold text-slate-900">Location:</span> <%= @conference.location %><br>
+			<span class="font-semibold text-slate-900">Dates:</span> <%= @conference.starts_on %> to <%= @conference.ends_on %>
+		</p>
+
+		<% if @conference.website_url.present? %>
+			<p class="mb-4"><%= link_to "Conference website", @conference.website_url, target: "_blank", rel: "noopener" %></p>
+		<% end %>
+
+		<% if @conference.description.present? %>
+			<h2 class="mb-2 text-xl">Description</h2>
+			<div class="prose prose-slate max-w-none text-slate-700"><%= simple_format(@conference.description) %></div>
+		<% end %>
+	</div>
+
+	<div class="mt-4 flex flex-wrap gap-2">
+		<% if authenticated? %>
+			<% if @bookmark %>
+				<%= button_to "Remove bookmark", bookmark_path(@bookmark), method: :delete, class: "btn-soft" %>
+			<% else %>
+				<%= button_to "Bookmark", conference_bookmark_path(@conference), method: :post, class: "btn-primary" %>
+			<% end %>
+		<% end %>
+
+		<% if current_user&.admin? %>
+			<%= link_to "Edit", edit_conference_path(@conference), class: "btn-ghost no-underline" %>
+			<%= button_to "Delete", conference_path(@conference), method: :delete, class: "btn-soft", form: { data: { turbo_confirm: "Are you sure?" } } %>
+		<% end %>
+	</div>
+</section>

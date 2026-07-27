@@ -1,0 +1,19 @@
+<section>
+	<h1 class="mb-6">My Bookmarked Conferences</h1>
+
+	<% if @bookmarks.empty? %>
+		<div class="panel text-slate-700">You have not bookmarked any conferences yet.</div>
+	<% else %>
+		<ul class="space-y-3">
+			<% @bookmarks.each do |bookmark| %>
+				<li class="panel flex flex-wrap items-center justify-between gap-3">
+					<div>
+						<%= link_to bookmark.conference.name, conference_path(bookmark.conference), class: "font-medium" %>
+						<p class="text-sm text-slate-600"><%= bookmark.conference.starts_on %> to <%= bookmark.conference.ends_on %></p>
+					</div>
+					<%= button_to "Remove", bookmark_path(bookmark), method: :delete, class: "btn-soft" %>
+				</li>
+			<% end %>
+		</ul>
+	<% end %>
+</section>

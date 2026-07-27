@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-white text-slate-800 antialiased;
+  }
+
+  h1 {
+    @apply text-3xl font-semibold tracking-tight text-slate-900;
+  }
+
+  h2 {
+    @apply text-2xl font-semibold tracking-tight text-slate-900;
+  }
+
+  a {
+    @apply text-emerald-700 underline-offset-2 transition hover:text-emerald-800 hover:underline;
+  }
+}
+
+@layer components {
+  .page-wrap {
+    @apply mx-auto max-w-5xl px-4 pb-10;
+  }
+
+  .panel {
+    @apply rounded-2xl border border-emerald-100 bg-mint-50 p-5 shadow-sm;
+  }
+
+  .input {
+    @apply mt-1 w-full rounded-xl border border-emerald-200 bg-white px-3 py-2 text-slate-900 placeholder:text-slate-400 focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-200;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-xl border border-emerald-600 bg-emerald-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-emerald-700;
+  }
+
+  .btn-soft {
+    @apply inline-flex items-center justify-center rounded-xl border border-rosepastel-300 bg-rosepastel-100 px-4 py-2 text-sm font-medium text-rosepastel-500 transition hover:bg-rosepastel-200;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center rounded-xl border border-emerald-200 bg-white px-4 py-2 text-sm font-medium text-emerald-800 transition hover:bg-mint-100;
+  }
+}

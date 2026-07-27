@@ -1,0 +1,13 @@
+<% content_for :title, "Conferences Hub" %>
+<% content_for :head do %>
+  <%= javascript_include_tag "conferences_hub", "data-turbo-track": "reload", type: "module" %>
+<% end %>
+
+<section>
+  <div class="mb-5">
+    <h1 class="mb-2">Conferences Hub</h1>
+    <p class="text-slate-600">Smart filters, sorting, and quick scanning of scientific conferences.</p>
+  </div>
+
+  <div id="conferences-hub-root"></div>
+</section>

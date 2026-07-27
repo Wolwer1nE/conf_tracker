@@ -1,0 +1,13 @@
+<% content_for :title, "Admin Console" %>
+<% content_for :head do %>
+  <%= javascript_include_tag "admin_spa", "data-turbo-track": "reload", type: "module" %>
+<% end %>
+
+<section>
+  <div class="mb-5">
+    <h1 class="mb-2">Admin Console</h1>
+    <p class="text-slate-600">Single-page management of conferences.</p>
+  </div>
+
+  <div id="admin-spa-root"></div>
+</section>

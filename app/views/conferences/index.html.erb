@@ -1,0 +1,44 @@
+<section>
+	<h1 class="mb-6">Scientific Conferences</h1>
+
+	<% if @conferences.empty? %>
+		<div class="panel text-slate-700">No conferences available yet.</div>
+	<% else %>
+		<ul class="grid list-none gap-4 p-0 sm:grid-cols-2">
+			<% @conferences.each do |conference| %>
+				<li class="panel">
+					<h2 class="mb-2 text-xl">
+						<%= link_to conference.name, conference_path(conference), class: "no-underline hover:underline" %>
+					</h2>
+
+					<p class="mb-3 text-sm text-slate-700">
+						<span class="font-semibold text-slate-900">Location:</span> <%= conference.location %><br>
+						<span class="font-semibold text-slate-900">Dates:</span> <%= conference.starts_on %> to <%= conference.ends_on %>
+					</p>
+
+					<% if conference.website_url.present? %>
+						<p class="mb-3 text-sm">
+							<%= link_to "Conference website", conference.website_url, target: "_blank", rel: "noopener", class: "text-emerald-700" %>
+						</p>
+					<% end %>
+
+					<% if authenticated? %>
+						<% bookmark = @bookmarks_by_conference_id[conference.id] %>
+						<% if bookmark %>
+							<%= button_to "Remove bookmark", bookmark_path(bookmark), method: :delete, class: "btn-soft" %>
+						<% else %>
+							<%= button_to "Bookmark", conference_bookmark_path(conference), method: :post, class: "btn-primary" %>
+						<% end %>
+					<% end %>
+
+					<% if current_user&.admin? %>
+						<div class="mt-3 flex flex-wrap gap-2">
+							<%= link_to "Edit", edit_conference_path(conference), class: "btn-ghost no-underline" %>
+							<%= button_to "Delete", conference_path(conference), method: :delete, class: "btn-soft", form: { data: { turbo_confirm: "Are you sure?" } } %>
+						</div>
+					<% end %>
+				</li>
+			<% end %>
+		</ul>
+	<% end %>
+</section>

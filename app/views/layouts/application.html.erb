@@ -18,12 +18,43 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
   <body>
-    <%= yield %>
+    <header class="mb-8 border-b border-emerald-100 bg-mint-50">
+      <nav class="mx-auto flex max-w-5xl flex-wrap items-center gap-3 px-4 py-4">
+        <%= link_to "Conferences", conferences_path, class: "rounded-lg px-2 py-1 font-medium text-emerald-900 no-underline hover:bg-mint-100" %>
+        <%= link_to "Conferences Hub", conferences_hub_path, class: "rounded-lg px-2 py-1 font-medium text-emerald-900 no-underline hover:bg-mint-100" %>
+
+        <% if authenticated? %>
+          <%= link_to "My bookmarks", bookmarks_path, class: "rounded-lg px-2 py-1 font-medium text-emerald-900 no-underline hover:bg-mint-100" %>
+          <% if current_user&.admin? %>
+            <%= link_to "Add conference", new_conference_path, class: "rounded-lg border border-emerald-300 bg-white px-3 py-1.5 text-sm font-medium text-emerald-900 no-underline hover:bg-mint-100" %>
+            <%= link_to "Admin SPA", admin_spa_path, class: "rounded-lg border border-emerald-300 bg-white px-3 py-1.5 text-sm font-medium text-emerald-900 no-underline hover:bg-mint-100" %>
+          <% end %>
+          <span class="ml-auto text-sm text-slate-700">Signed in as <strong><%= current_user.email_address %></strong></span>
+          <%= button_to "Sign out", session_path, method: :delete, class: "btn-soft" %>
+        <% else %>
+          <span class="ml-auto"></span>
+          <%= link_to "Sign up", new_registration_path, class: "btn-ghost no-underline" %>
+          <%= link_to "Sign in", new_session_path, class: "btn-primary no-underline" %>
+        <% end %>
+      </nav>
+    </header>
+
+    <main class="page-wrap">
+      <% if flash[:notice] %>
+        <div class="mb-4 rounded-xl border border-emerald-200 bg-mint-100 px-4 py-3 text-emerald-900"><%= flash[:notice] %></div>
+      <% end %>
+
+      <% if flash[:alert] %>
+        <div class="mb-4 rounded-xl border border-rosepastel-300 bg-rosepastel-100 px-4 py-3 text-rosepastel-500"><%= flash[:alert] %></div>
+      <% end %>
+
+      <%= yield %>
+    </main>
   </body>
 </html>

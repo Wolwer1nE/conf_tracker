@@ -1,0 +1,26 @@
+<section class="mx-auto max-w-xl">
+  <div class="panel">
+    <h1 class="mb-5">Sign in</h1>
+
+    <%= form_with url: session_path, class: "space-y-4" do |form| %>
+      <div>
+        <%= form.label :email_address, class: "text-sm font-medium text-slate-700" %>
+        <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address], class: "input" %>
+      </div>
+
+      <div>
+        <%= form.label :password, class: "text-sm font-medium text-slate-700" %>
+        <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", maxlength: 72, class: "input" %>
+      </div>
+
+      <div class="pt-2">
+        <%= form.submit "Sign in", class: "btn-primary" %>
+      </div>
+    <% end %>
+
+    <div class="mt-4 space-y-1 text-sm">
+      <p><%= link_to "Forgot password?", new_password_path %></p>
+      <p><%= link_to "Need an account? Sign up", new_registration_path %></p>
+    </div>
+  </div>
+</section>

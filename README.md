@@ -12,6 +12,22 @@ This project uses Dev container for development. To set up the development envir
    ```
    rails db:seed
    ```
+   Seed data includes:
+   - 10 real scientific conferences
+   - 2 default users:
+     - Admin: `admin@conf-tracker.local` / `admin12345`
+     - Scientist: `scientist@conf-tracker.local` / `science12345`
+
+   You can override seeded credentials using environment variables:
+   - `SEED_ADMIN_EMAIL`
+   - `SEED_ADMIN_PASSWORD`
+   - `SEED_SCIENTIST_EMAIL`
+   - `SEED_SCIENTIST_PASSWORD`
+
+   Example:
+   ```
+   SEED_ADMIN_EMAIL=owner@example.com SEED_ADMIN_PASSWORD=strongpass rails db:seed
+   ```
 6. Start the development server by running the following command in the terminal:
     ```
     bin/dev
@@ -26,3 +42,4 @@ This project uses Dev container for development. To set up the development envir
 2. Make your changes and commit them with clear and descriptive messages.
 3. Push your changes to your forked repository.
 4. Create a pull request to the main repository, describing your changes and why they should be merged.
+
